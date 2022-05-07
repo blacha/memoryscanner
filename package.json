@@ -1,0 +1,38 @@
+{
+  "name": "binmemscan",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blacha/binmemscan.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
+  "scripts": {
+    "build": "tsc --pretty",
+    "build-watch": "tsc --pretty --watch",
+    "lint": "eslint 'src/**/*.ts' --quiet --fix",
+    "test": "ospec build/**/*.test.js",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+  },
+  "dependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "files": [
+    "build/src"
+  ],
+  "devDependencies": {
+    "@linzjs/style": "^3.7.0",
+    "@types/node": "^17.0.31",
+    "@types/ospec": "^4.0.3",
+    "conventional-changelog-cli": "^2.2.2",
+    "ospec": "^4.1.1",
+    "source-map-support": "^0.5.21"
+  }
+}
