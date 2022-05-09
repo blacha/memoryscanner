@@ -17,6 +17,7 @@ const ret = await proc.scan('01 02 ?? f3 a4');
  *   0x5f0763fa
  *   0x1030fa61
  * ]
+ */
 
 ```
 
