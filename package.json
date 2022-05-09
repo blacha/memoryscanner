@@ -13,11 +13,10 @@
     "build": "tsc --pretty",
     "build-watch": "tsc --pretty --watch",
     "lint": "eslint 'src/**/*.ts' --quiet --fix",
-    "test": "ospec build/**/*.test.js",
+    "test": "pta",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "publishConfig": {
     "access": "public"
   },
@@ -30,9 +29,9 @@
   "devDependencies": {
     "@linzjs/style": "^3.7.0",
     "@types/node": "^17.0.31",
-    "@types/ospec": "^4.0.3",
     "conventional-changelog-cli": "^2.2.2",
-    "ospec": "^4.1.1",
-    "source-map-support": "^0.5.21"
+    "pta": "^1.0.2",
+    "source-map-support": "^0.5.21",
+    "zora": "^5.0.3"
   }
 }

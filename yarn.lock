@@ -111,11 +111,6 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
-"@types/ospec@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@types/ospec/-/ospec-4.0.3.tgz#a15d0f0a5e3eae481fa19bfe04b5ad621c19ace8"
-  integrity sha512-eE1PW3v2rsX4N9SeEWas7SDdOpESBCw7H5YwsCiFmt0fu5SXAXXz/n7gRCt8xVQpArm0Gsn47V3oPLGxvj8pzA==
-
 "@typescript-eslint/eslint-plugin@^5.14.0":
   version "5.14.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.14.0.tgz#5119b67152356231a0e24b998035288a9cd21335"
@@ -248,6 +243,11 @@ ansi-styles@^4.1.0:
   dependencies:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
+
+arg@~5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.1.tgz#eb0c9a8f77786cad2af8ff2b862899842d7b6adb"
+  integrity sha512-e0hDa9H2Z9AwFkk2qDlwhoMYE4eToKarchkQHovNdLTCYMHZHeRjI71crOh+dio4K6u1IcwubQqo79Ga4CyAQA==
 
 argparse@^2.0.1:
   version "2.0.1"
@@ -385,6 +385,11 @@ color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+
+colorette@~1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
+  integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
 compare-func@^2.0.0:
   version "2.0.0"
@@ -621,6 +626,11 @@ deep-is@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
   integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
+
+diff@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
+  integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -976,7 +986,7 @@ globals@^13.6.0, globals@^13.9.0:
   dependencies:
     type-fest "^0.20.2"
 
-globby@^11.0.4:
+globby@^11.0.4, globby@~11.0.4:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/globby/-/globby-11.0.4.tgz#2cbaff77c2f2a62e71e9b2813a67b97a3a3001a5"
   integrity sha512-9O4MVG9ioZJ08ffbcyVYyLOJLk5JQ688pJ4eMGLpdWLHq/Wr1D9BlriLQyL0E+jbkuePVZXYFj47QM/v093wHg==
@@ -1500,13 +1510,6 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-ospec@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/ospec/-/ospec-4.1.1.tgz#52faa97b2de3bec5b447795b0b460da5c0ebb4a9"
-  integrity sha512-fgWIk1eLDidfB+ixTo3PL3HuuO6iX2LhgWxdnWwqRu2rJdpTowgeAP0RHgt3DSUVyszs964fMuq1tB7Ov2C38A==
-  dependencies:
-    glob "^7.1.3"
-
 p-limit@^1.1.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-1.3.0.tgz#b86bd5f0c25690911c7590fcbfc2010d54b3ccb8"
@@ -1683,6 +1686,15 @@ process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
+
+pta@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/pta/-/pta-1.0.2.tgz#2e5078ba070bd8dda84d66de638f8d45372c501d"
+  integrity sha512-SmeVdeyJAOeS5BYjuXrVjpgOMaCW1J91fasJBIg8XCKJmBPPtlLPD3tU1hn4K7Xk9kLjEwTL09rB0WUBpmQwyg==
+  dependencies:
+    arg "~5.0.0"
+    globby "~11.0.4"
+    zora-reporters "^1.3.2"
 
 punycode@^2.1.0:
   version "2.1.1"
@@ -2155,11 +2167,6 @@ type-fest@^0.8.1:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-typescript-memoize@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/typescript-memoize/-/typescript-memoize-1.1.0.tgz#4a8f512d06fc995167c703a3592219901db8bc79"
-  integrity sha512-LQPKVXK8QrBBkL/zclE6YgSWn0I8ew5m0Lf+XL00IwMhlotqRLlzHV+BRrljVQIc+NohUAuQP7mg4HQwrx5Xbg==
-
 typescript@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
@@ -2236,3 +2243,17 @@ yargs-parser@^20.2.3:
   version "20.2.3"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.3.tgz#92419ba867b858c868acf8bae9bf74af0dd0ce26"
   integrity sha512-emOFRT9WVHw03QSvN5qor9QQT9+sw5vwxfYweivSMHTcAXPefwVae2FjO7JJjj8hCE4CzPOPeFM83VwT29HCww==
+
+zora-reporters@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/zora-reporters/-/zora-reporters-1.3.2.tgz#89cdd5b39cbcc7a8acaf1180e7f94c0948feec4c"
+  integrity sha512-9h5wwGXOhcz5b5Jy1aUQZ4Luqxi9ZPetoxaGXr8w72tykrApV40iOiWHsSbUVGD+lEi4j0IIoj4n7IDrizUjFQ==
+  dependencies:
+    arg "~5.0.0"
+    colorette "~1.2.2"
+    diff "~5.0.0"
+
+zora@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/zora/-/zora-5.0.3.tgz#1b16c19e9dbbda612f4c57feee3072219020594a"
+  integrity sha512-3DAIXwF1LAM17da2WXbW3vxit/EuTjXFoLsDe14ZAWePaq7v7SETp4uBus2vwrl67KozYrLYWsGYJ4GOsM7NVA==

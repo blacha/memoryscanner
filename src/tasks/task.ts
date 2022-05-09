@@ -1,45 +1,32 @@
 export type Task = TaskScan;
 
 export interface TaskScan {
-  id: number;
-
+  /** Process id */
+  pid: number;
+  /** Byte to start at */
   start: number;
+  /** Bytes to end at */
   end: number;
 
-  pattern: string;
+  /** Patter to scan for */
+  pattern: number[] | Buffer;
+
+  /** Extra criteria for the pattern */
   criteria?: Criteria[];
 }
 
-export type Criteria = CriteraRange;
+export type Criteria = CriteriaRange;
 
 export type StrutType = 'u8' | 'lu16' | 'lu32' | 'lu64';
 
-export interface CriteraRange {
+export interface CriteriaRange {
   type: 'range';
   format: StrutType;
+  offset: number;
   min?: number;
   max: number;
 }
 
-function* findPattern(mem: Buffer, pattern: number[]): Generator<number> {
-  console.log('FindPatter', mem, pattern);
-  for (let i = 0; i < mem.length - pattern.length; i++) {
-    let found = false;
-    for (let j = 0; j < pattern.length; j++) {
-      const byte = pattern[j];
-      if (byte === -1) continue;
-      if (mem[i + j] === byte) continue;
-      found = false;
-      break;
-    }
-
-    console.log(i, found);
-    if (found) yield i;
-  }
-}
-
-for (const offset of findPattern(Buffer.from([0x00, 0x01, 0x02, 0x01, 0x03]), [0x01, -1])) {
-  console.log({ offset });
-}
-
-console.log('Hello');
+export type MemoryTasks = {
+  scan: (req: TaskScan) => Promise<number[]>;
+};

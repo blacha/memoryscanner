@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import { FileHandle } from 'fs/promises';
-import { toHex } from '../hex.js';
+import { toHex } from '../format.js';
 
 export interface ProcessMemoryMap {
   /** Offset of start of memory block */
@@ -17,11 +17,13 @@ export interface ProcessMemoryMap {
 export type FilterFunc = (f: ProcessMemoryMap) => boolean;
 
 export class Process {
+  static CacheDurationMs = 10_000;
   /** Process ID */
-  pid: number;
-  fh: Promise<FileHandle> | null;
-  /** Proces Name */
-  name: string;
+  readonly pid: number;
+  /** cached file handle */
+  private fh: Promise<FileHandle> | null;
+  /** Process Name */
+  readonly name: string;
 
   constructor(pid: number, name: string) {
     this.pid = pid;
@@ -40,7 +42,6 @@ export class Process {
         const first = data.toString().split('\n')[0];
         const fileName = first.split('\t')[1];
 
-        console.log(fileName);
         yield { name: fileName, pid };
       } catch (e) {
         // noop
@@ -58,18 +59,17 @@ export class Process {
     return null;
   }
 
-  _loadMapPromise: { data: Promise<ProcessMemoryMap[]>; time: number } | null;
-  mapCacheDuration = 10_000;
+  private _loadMapPromise: { data: Promise<ProcessMemoryMap[]>; time: number } | null;
   loadMap(): Promise<ProcessMemoryMap[]> {
     if (this._loadMapPromise) {
-      if (Date.now() - this._loadMapPromise.time > this.mapCacheDuration) return this._loadMapPromise.data;
+      if (Date.now() - this._loadMapPromise.time > Process.CacheDurationMs) return this._loadMapPromise.data;
     }
     this._loadMapPromise = { time: Date.now(), data: this._loadMap() };
     return this._loadMapPromise.data;
   }
 
   /** Load the memory map */
-  async _loadMap(): Promise<ProcessMemoryMap[]> {
+  private async _loadMap(): Promise<ProcessMemoryMap[]> {
     const data = await fs.readFile(`/proc/${this.pid}/maps`);
 
     const memLines = data.toString().trim().split('\n');
@@ -90,7 +90,8 @@ export class Process {
       // If the process cant write to it, then its not useful to us
       if (!obj.permissions.startsWith('rw')) continue;
       // Ignore graphic card data
-      if (obj.path?.includes('/dev/nvidia')) continue;
+      if (obj.line.includes('/dev/nvidia')) continue;
+      if (obj.line.includes('/memfd:')) continue;
 
       memMaps.push(obj);
     }
@@ -110,7 +111,6 @@ export class Process {
 
       return buf;
     } catch (e) {
-      // console.trace(`Failed to read, ${offset}, ${count}`);
       throw new Error('Failed to read memory at: ' + toHex(offset) + ' - ' + e);
     }
   }
