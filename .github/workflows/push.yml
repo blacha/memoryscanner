@@ -15,10 +15,8 @@ jobs:
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Publish NPM
+      - name: Publish to NPM
         if: startsWith(github.ref, 'refs/tags/v')
-        run: yarn publish
+        run: npx lerna publish from-git --yes
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-      - uses: blacha/hyperfine-action@v1
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN_LINZJS}}
