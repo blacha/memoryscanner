@@ -1,7 +1,7 @@
 import { toHuman } from './format.js';
 import { Process } from './linux/process.js';
 import { MemoryTasks, TaskScan } from './tasks/task.js';
-import { WorkerRpcPool } from './wtrpc/pool.js';
+import { WorkerRpcPool } from 'wtrpc';
 
 export { Process, ProcessMemoryMap } from './linux/process.js';
 

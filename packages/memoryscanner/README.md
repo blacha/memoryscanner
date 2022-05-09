@@ -1,6 +1,3 @@
-# memoryscanner
-
-
 Multithreaded process memory scanner
 
 ```typescript

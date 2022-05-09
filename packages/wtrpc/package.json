@@ -1,0 +1,23 @@
+{
+  "name": "wtrpc",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blacha/memoryscanner.git"
+  },
+  "private": "true",
+  "license": "MIT",
+  "type": "module",
+  "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "files": [
+    "build/src"
+  ]
+}
