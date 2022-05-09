@@ -1,6 +1,6 @@
 {
   "name": "memoryscanner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/blacha/memoryscanner.git"
@@ -10,7 +10,6 @@
   "type": "module",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "dependencies": {},
   "publishConfig": {
     "access": "public"
   },
