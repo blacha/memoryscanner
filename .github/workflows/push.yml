@@ -1,6 +1,7 @@
 name: Build/Test
 
 on: [push]
+permissions: write-all
 
 jobs:
   build:
