@@ -13,8 +13,8 @@ Implement the contract as a worker
 
 `worker.ts`
 ```typescript
-import {WorkerRpc} from 'wtrpc'
-import {RpcContract} from './contract.js'
+import { WorkerRpc } from 'wtrpc'
+import { RpcContract } from './contract.js'
 import { parentPort } from 'node:worker_threads';
 
 const worker = new WorkerRpc<RpcContract>({
@@ -29,8 +29,8 @@ if (parentPort) worker.bind(parentPort);
 
 `pool.ts`
 ```typescript
-import {WorkerRpcPool} from 'wtrpc'
-import {RpcContract} from './contract.js'
+import { WorkerRpcPool } from 'wtrpc'
+import { RpcContract } from './contract.js'
 
 const workerUrl = new URL(import.meta.url, './worker.js');
 const threadCount = os.cpus().length;
