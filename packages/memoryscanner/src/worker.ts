@@ -2,7 +2,7 @@ import { parentPort } from 'node:worker_threads';
 import { Process } from './linux/process.js';
 import { MemoryTasks, StrutType, TaskScan } from './tasks/task.js';
 import { findPattern } from './tasks/task.scan.js';
-import { WorkerRpc } from 'wtrpc';
+import { WorkerRpc } from '@wtrpc/core';
 
 const ProcessCache = new Map<number, Process>();
 
