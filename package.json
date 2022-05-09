@@ -1,9 +1,9 @@
 {
-  "name": "binmemscan",
+  "name": "memoryscanner",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blacha/binmemscan.git"
+    "url": "https://github.com/blacha/memoryscanner.git"
   },
   "license": "MIT",
   "type": "module",
