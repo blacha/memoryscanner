@@ -1,3 +1,7 @@
+# memoryscanner
+
+*WIP* this is still a work in progress APIs may not exist and not work correctly.
+
 Multithreaded process memory scanner
 
 ```typescript
