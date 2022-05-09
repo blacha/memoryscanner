@@ -1,5 +1,5 @@
 {
-  "name": "wtrpc",
+  "name": "@wtrpc/core",
   "version": "0.0.3",
   "repository": {
     "type": "git",
