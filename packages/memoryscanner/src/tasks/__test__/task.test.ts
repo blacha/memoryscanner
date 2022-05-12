@@ -3,21 +3,31 @@ import { test } from 'node:test';
 import { findPattern } from '../task.scan.js';
 
 test('should find a pattern', () => {
-  const pat = [...findPattern(Buffer.from([0x45, 0x46]), [0x45, 0x46])];
+  const pat = [...findPattern(Buffer.from([0x45, 0x46]), '45 46')];
   deepEqual(pat, [0]);
 });
 
 test('should find a pattern at the end of a buffer', () => {
-  const pat = [...findPattern(Buffer.from([0x00, 0x00, 0x00, 0x45, 0x46]), [0x45, 0x46])];
+  const pat = [...findPattern(Buffer.from([0x00, 0x00, 0x00, 0x45, 0x46]), '45 46')];
   deepEqual(pat, [3]);
 });
 
 test('should find a multiple patterns in a buffer', () => {
-  const pat = [...findPattern(Buffer.from([0x45, 0x46, 0x00, 0x45, 0x46]), [0x45, 0x46])];
+  const pat = [...findPattern(Buffer.from([0x45, 0x46, 0x00, 0x45, 0x46]), '45 46')];
   deepEqual(pat, [0, 3]);
 });
 
+test('should find a patterns with wild cards', () => {
+  const pat = [...findPattern(Buffer.from([0x45, 0x46, 0x00, 0x45, 0x46]), '45 46 ??')];
+  deepEqual(pat, [0]);
+});
+
 test('Should find multiple patterns in a text buffer', () => {
-  const pat = [...findPattern(Buffer.from('this is a test message test one test two'), Buffer.from('test'))];
+  const pat = [
+    ...findPattern(
+      Buffer.from('this is a test message test one test two'),
+      [...Buffer.from('test')].map((c) => c.toString(16)).join(' '),
+    ),
+  ];
   deepEqual(pat, [10, 23, 32]);
 });

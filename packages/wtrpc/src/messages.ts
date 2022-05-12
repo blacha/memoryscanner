@@ -12,6 +12,7 @@ export interface WorkerResponseError {
   id: number;
   type: 'error';
   message?: string;
+  stack?: string;
 }
 
 export interface WorkerRequest<E extends Requests, K extends keyof E = keyof E> {

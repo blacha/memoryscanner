@@ -7,6 +7,8 @@ export interface ProcessMemoryMap {
   start: number;
   /** Offset at end of memory block */
   end: number;
+  /** Size of the memory block */
+  size: number;
   /**  */
   permissions: string;
   path?: string;
@@ -16,12 +18,10 @@ export interface ProcessMemoryMap {
 
 export type FilterFunc = (f: ProcessMemoryMap) => boolean;
 
-export class Process {
+export class ProcessLinux {
   static CacheDurationMs = 10_000;
   /** Process ID */
   readonly pid: number;
-  /** cached file handle */
-  private fh: Promise<FileHandle> | null;
   /** Process Name */
   readonly name: string;
 
@@ -51,9 +51,9 @@ export class Process {
   }
 
   /** Find a pid from a process name */
-  static async findByName(name: string): Promise<Process | null> {
+  static async findByName(name: string): Promise<ProcessLinux | null> {
     for await (const pt of this.listProcesses()) {
-      if (pt.name.includes(name)) return new Process(pt.pid, name);
+      if (pt.name.includes(name)) return new ProcessLinux(pt.pid, name);
     }
 
     return null;
@@ -62,7 +62,7 @@ export class Process {
   private _loadMapPromise: { data: Promise<ProcessMemoryMap[]>; time: number } | null;
   loadMap(): Promise<ProcessMemoryMap[]> {
     if (this._loadMapPromise) {
-      if (Date.now() - this._loadMapPromise.time > Process.CacheDurationMs) return this._loadMapPromise.data;
+      if (Date.now() - this._loadMapPromise.time > ProcessLinux.CacheDurationMs) return this._loadMapPromise.data;
     }
     this._loadMapPromise = { time: Date.now(), data: this._loadMap() };
     return this._loadMapPromise.data;
@@ -82,6 +82,7 @@ export class Process {
       const obj = {
         start,
         end,
+        size: end - start,
         permissions: parts[1],
         path: parts.length > 7 ? parts[parts.length - 1] : undefined,
         line,
@@ -99,14 +100,38 @@ export class Process {
     return memMaps;
   }
 
+  _fh: Promise<FileHandle> | null;
+  _fhLastAccess: number = Date.now();
+  _fhTimeout: NodeJS.Timeout | null;
+  /** Cache the file handle and auto close it after 5 seconds of not being used */
+  get fh(): Promise<FileHandle> {
+    this._fhLastAccess = Date.now();
+    if (this._fh) return this._fh;
+
+    this._fh = fs.open(this.memoryFile, 'r');
+    this._fhTimeout = setTimeout(async () => {
+      if (this._fh == null) return;
+      if (Date.now() - this._fhLastAccess > 5_000) {
+        const fh = this._fh;
+        this._fh = null;
+        await fh.then((c) => c.close());
+      }
+    }, 5_000);
+    return this._fh;
+  }
+
+  get memoryFile(): string {
+    return `/proc/${this.pid}/mem`;
+  }
+
   /** Read a section of memory from this process */
   async read(offset: number, count: number): Promise<Buffer> {
     try {
-      if (this.fh == null) this.fh = fs.open(`/proc/${this.pid}/mem`, 'r');
       const fh = await this.fh;
-      const buf = Buffer.alloc(count);
+      if (fh == null) throw new Error('Failed to open :' + this.memoryFile);
+      const buf = Buffer.allocUnsafe(count);
 
-      const ret = await fh?.read(buf, 0, buf.length, offset);
+      const ret = await fh.read(buf, 0, buf.length, offset);
       if (ret == null || ret.bytesRead === 0) throw new Error('Failed to read memory at: ' + toHex(offset));
 
       return buf;
