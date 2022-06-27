@@ -5928,6 +5928,6 @@ zora-reporters@^1.3.2:
     diff "~5.0.0"
 
 zora@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/zora/-/zora-5.0.3.tgz#1b16c19e9dbbda612f4c57feee3072219020594a"
-  integrity sha512-3DAIXwF1LAM17da2WXbW3vxit/EuTjXFoLsDe14ZAWePaq7v7SETp4uBus2vwrl67KozYrLYWsGYJ4GOsM7NVA==
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/zora/-/zora-5.0.4.tgz#97d8d889788a09b9e7001b3856908527a45b09a2"
+  integrity sha512-yRd/0VNjEjBoV53zOnIYelo7iyywCbDfF6PqbvTanbQXTdm0XiBagR4H+eVQaoVwgmUa/0A1WRiphkAv2l96lg==
